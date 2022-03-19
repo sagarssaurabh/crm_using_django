@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leads</title>
+</head>
+<body>
+<h1>THIS IS LIST OF LEADS</h1>
+<ul>
+  {% for lead in leads %}
+  <li> <a href="/leads/{{ lead.id }}/"> {{ lead.first_name }} {{ lead.last_name }} </a> </li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
