@@ -8,6 +8,10 @@
   <h6> <a href="/leads">  Go back to Lead List </a> </h6>
     <hr />
   <h3> Create a new lead</h3>
-    {{ form }}
+  <form class=""  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>
