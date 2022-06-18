@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>lead update</title>
-</head>
-<body>
-  <h6> <a href="/leads">  Go back to Lead List </a> </h6>
+{% extends "base.html" %}
+{% block content %}
+  <h6> <a href="{% url 'leads:lead-list' %}">  Go back to Lead List </a> </h6>
     <hr />
   <h3> Create a new lead</h3>
   <form class=""  method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
-  </form>
-</body>
-</html>
+
+{% endblock content %}

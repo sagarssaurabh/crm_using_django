@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>lead detail</title>
-</head>
-<body>
-<h1>{{ lead.first_name }} {{ lead.last_name }}</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>{{ lead.first_name }} {{ lead.last_name }}</h1>
+  <a href="{% url 'leads:lead-update' lead.pk %}"><button type="button" name="update">Update</button></a>
+  <a href="{% url 'leads:lead-delete' lead.pk %}"><button type="button" name="delete">Delete</button></a>
+{% endblock content %}
