@@ -1,9 +1,20 @@
 from django.shortcuts import render, redirect, reverse
-from .models import Lead, Agent
-from .forms import LeadForm, LeadModelForm
+# from django.contrib.auth.forms import UserCreationForm
+from .models import Lead
+from .forms import LeadModelForm, CustomUserCreationForm
 from django.views import generic
 
-#class based views
+# class based views
+
+
+class SignupView(generic.CreateView):
+    template_name = "registration/signup.html"
+    form_class = CustomUserCreationForm
+
+    def get_success_url(self):
+        return reverse('login-page')
+
+
 class LandingPageView(generic.TemplateView):
     template_name = "landing.html"
 
@@ -50,6 +61,7 @@ class LeadDeleteView(generic.DeleteView):
 def landing_view(request):
     return render(request, "landing.html")
 
+
 def lead_list(request):
     leads = Lead.objects.all()
     context = {
@@ -57,12 +69,14 @@ def lead_list(request):
     }
     return render(request, "leads/lead_list.html", context)
 
+
 def lead_detail(request, pk):
     lead = Lead.objects.get(id=pk)
     context = {
         "lead": lead
     }
     return render(request, "leads/lead_detail.html", context)
+
 
 def lead_create(request):
     print(request.method)
@@ -79,6 +93,7 @@ def lead_create(request):
     }
     return render(request, 'leads/lead_create.html', context)
 
+
 def lead_update(request, pk):
     lead = Lead.objects.get(id=pk)
     form = LeadModelForm(instance=lead)
@@ -94,10 +109,12 @@ def lead_update(request, pk):
     }
     return render(request, 'leads/lead_update.html', context)
 
+
 def lead_delete(request, pk):
     lead = Lead.objects.get(id=pk)
     lead.delete()
     return redirect("/leads")
+
 
 # def lead_update(request, pk):
 #     lead = Lead.objects.get(id=pk)
@@ -122,10 +139,6 @@ def lead_delete(request, pk):
 #         "lead": lead
 #     }
 #     return render(request, 'leads/lead_update.html', context)
-
-
-
-
 
     # def lead_create(request):
     #     print(request.method)
